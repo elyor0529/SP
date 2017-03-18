@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <title>Demo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+
+    <!--
+        libs
+        -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/windows8.css" rel="stylesheet" />
+    <link href="assets/css/PagedList.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="assets/components/xeditable/css/xeditable.css" rel="stylesheet">
+
+    <!--
+        components
+        -->
+    <link href="assets/components/loading-bar.css" rel="stylesheet" />
+    <link href="assets/components/angular-csp.css" rel="stylesheet" />
+    <link href="assets/components/textAngular/textAngular.css" rel="stylesheet" />
+    <link href="assets/css/site.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/">
+                    Demo
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                <div ng-include="'app/views/shared/_menu.html'"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <div ng-include="'app/views/shared/_title.html'"></div>
+            <div class="windows8" id="page-loading" ng-if="pageLoading">
+                <div class="wBall" id="wBall_1">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_2">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_3">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_4">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_5">
+                    <div class="wInnerBall"></div>
+                </div>
+            </div>
+            <div ui-view id="ui-view" ng-if="!pageLoading"></div>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2017 - Demo.
+        </footer>
+    </div>
+
+    <!--
+        HTML 5
+        -->
+    <script src="assets/js/modernizr.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <script src="assets/js/site.js"></script>
+
+    <!--
+    libs
+       -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/underscore.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
+
+    <!--
+        components
+        -->
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/components/loading-bar.js"></script>
+    <script src="assets/components/ui/angular-ui-router.js"></script>
+    <script src="assets/components/angular-cookies.js"></script>
+    <script src="assets/components/angular-local-storage.js"></script>
+    <script src="assets/components/jcs-auto-validate.js"></script>
+    <script src="assets/components/textAngular/textAngularSetup.js"></script>
+    <script src="assets/components/textAngular/textAngular-rangy.min.js"></script>
+    <script src="assets/components/textAngular/textAngular-sanitize.js"></script>
+    <script src="assets/components/textAngular/textAngular.js"></script>
+    <script src="assets/components/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="assets/components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="assets/components/xeditable/js/xeditable.js"></script>
+    <script src="app/app.js"></script>
+
+    <!--
+        services
+        -->
+    <script src="app/services/authInterceptorService.js"></script>
+    <script src="app/services/utilityService.js"></script>
+    <script src="app/services/accountService.js"></script>
+    <script src="app/services/messageService.js"></script>
+
+    <!--
+    directives
+    -->
+    <!--
+        filters
+        -->
+    <script src="assets/components/angular-filter/angular-filter.min.js"></script>
+
+    <!--
+      modiles
+        -->
+    <!--
+                    controllers
+                -->
+    <script src="app/controllers/account/confirmemailController.js"></script>
+    <script src="app/controllers/account/forgotpasswordController.js"></script>
+    <script src="app/controllers/account/loginController.js"></script>
+    <script src="app/controllers/account/profileController.js"></script>
+    <script src="app/controllers/account/resetpasswordController.js"></script>
+    <script src="app/controllers/account/signupController.js"></script>
+    <script src="app/controllers/account/verificationemailController.js"></script>
+    <script src="app/controllers/home/cookieuseController.js"></script>
+    <script src="app/controllers/home/indexController.js"></script>
+    <script src="app/controllers/home/privacypolicyController.js"></script>
+    <script src="app/controllers/home/termsofserviceController.js"></script>
+    <script src="app/controllers/message/addController.js"></script>
+    <script src="app/controllers/message/listController.js"></script>
+    <script src="app/controllers/message/editController.js"></script>
+    <script src="app/controllers/message/removeController.js"></script>
+</body>
+</html>
