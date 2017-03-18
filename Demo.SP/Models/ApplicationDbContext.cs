@@ -4,6 +4,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Demo.SP.Migrations;
 using EntityFramework.DynamicFilters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -13,6 +14,11 @@ namespace Demo.SP.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        static ApplicationDbContext()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+        }
 
         private void ReConfigure()
         {
