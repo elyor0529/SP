@@ -26,6 +26,21 @@ namespace Demo.SP.Controllers
             return Ok(model);
         }
 
+        [HttpGet]
+        [ActionName("details")]
+        public async Task<IHttpActionResult> GetDetails(int? id)
+        {
+            if (id == null)
+                return BadRequest();
+
+            var book = await Db.Messages.FindAsync(id);
+
+            if (book == null)
+                return NotFound();
+
+            return Ok(book);
+        }
+
         [HttpPost]
         [ActionName("add")]
         public async Task<IHttpActionResult> Post(Message model)
@@ -35,6 +50,30 @@ namespace Demo.SP.Controllers
 
             Db.Messages.Add(model);
             Db.Entry(model).State = EntityState.Added;
+
+            await Db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [ActionName("edit")]
+        public async Task<IHttpActionResult> Put(Message model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var ent = await Db.Messages.FindAsync(model.Id);
+
+            if (ent == null)
+                return NotFound();
+
+            ent.Text = model.Text; 
+            ent.Date = model.Date;
+            ent.User = model.User;
+
+            Db.Messages.Attach(ent);
+            Db.Entry(ent).State = EntityState.Modified;
 
             await Db.SaveChangesAsync();
 

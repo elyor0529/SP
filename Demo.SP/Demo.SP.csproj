@@ -247,7 +247,6 @@
     <Content Include="app\services\messageService.js" />
     <Content Include="app\services\utilityService.js" />
     <Content Include="app\views\account\login.html" />
-    <Content Include="app\views\message\add.html" />
     <Content Include="app\views\message\list.html" />
     <Content Include="app\views\shared\_menu.html" />
     <Content Include="app\views\shared\_title.html" />
@@ -324,7 +323,6 @@
     <Content Include="assets\components\ui\uploader.min.js" />
     <Content Include="assets\components\ui\validate.js" />
     <Content Include="assets\components\ui\validate.min.js" />
-    <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\PagedList.css" />
@@ -335,7 +333,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\loading-sm.gif" />
     <Content Include="assets\images\loading.gif" />
-    <Content Include="assets\js\angular.js" />
+    <Content Include="assets\js\angular.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\jquery.min.js" />
     <Content Include="assets\js\modernizr.min.js" />

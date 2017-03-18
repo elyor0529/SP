@@ -1,93 +1,67 @@
-﻿<div class="row">
-    <div class="col-lg-4">
-        <p data-ng-show="authentication.isAuth">
-            <a href="#/message/add" class="btn btn-link">
-                <span class="fa fa-plus" aria-hidden="true"></span>
-                Add new
-            </a>
-        </p>
-    </div>
-    <div class="col-lg-8">
-        <form class="form-inline" role="form" novalidate="novalidate" ng-submit="searching()" disable-auto-validate="true" validate-on-form-submit="true">
-            <div class="form-group pull-right">
-                <div class="input-group">
-                    <input type="search" data-ng-model="search" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="fa fa-search" aria-hidden="true"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<table class="table table-bordered table-responsive">
-    <thead>
-        <tr>
-            <th>
-                #
-            </th>
-            <th>
-                <a href="#/message/list?page={{page}}&search={{search}}&column={{column}}&sort={{sort}}" ng-click="sorting('name')">
-                    Name
-                    <span ng-show="column === 'title' && sort==='desc'" class="fa fa-caret-down"></span>
-                    <span ng-show="column === 'title' && sort==='asc'" class="fa fa-caret-up"></span>
-                </a>
-            </th>
-            <th>
-                Text
-            </th>
-            <th>
-                <a href="#/message/list?page={{page}}&search={{search}}&column={{column}}&sort={{sort}}" ng-click="sorting('date')">
-                    Date
-                    <span ng-show="column === 'date' && sort==='desc'" class="fa fa-caret-down"></span>
-                    <span ng-show="column === 'date' && sort==='asc'" class="fa fa-caret-up"></span>
-                </a>
-            </th>
-            <th data-ng-show="authentication.isAuth"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="item in messageData">
-            <td>
-                {{item.id}}
-            </td>
-            <td>
-                {{item.name}}
-            </td>
-            <td>
-                {{item.text}}
-            </td>
-            <td>
-                {{item.date}}
-            </td>
-            <td data-ng-show="authentication.isAuth">
-                <a href="#/message/edit?id={{item.id}}" class="btn btn-link">
-                    <span class="fa fa-edit" aria-hidden="true"></span>
-                    Edit
-                </a>
-                <a href="#/message/remove?id={{item.id}}" class="btn btn-link" onclick="return confirm('You are sure?');">
-                    <span class="fa fa-trash" aria-hidden="true"></span>
-                    Delete
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+﻿
 
 <div class="row">
-    <div class="col-lg-4">
-        <p>Showing {{pager.firstItemOnPage}} to {{pager.lastItemOnPage}} of {{pager.totalItemCount}} entries</p>
+
+    <div class="col-xs-8">
+
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                    <th>
+                        <a href="#/message/list?page={{page}}&search={{search}}&column={{column}}&sort={{sort}}" ng-click="sorting('date')">
+                            Date
+                            <span ng-show="column === 'date' && sort==='desc'" class="fa fa-caret-down"></span>
+                            <span ng-show="column === 'date' && sort==='asc'" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th data-ng-show="authentication.isAuth"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in messageList">
+                    <td>
+                        {{item.id}}
+                    </td>
+                    <td>
+                        {{item.text}}
+                    </td>
+                    <td>
+                        {{item.date}}
+                    </td>
+                    <td data-ng-show="authentication.isAuth">
+                        <a  ng-click="details(item.id)" class="btn btn-link">
+                            <span class="fa fa-edit" aria-hidden="true"></span>
+                            Edit
+                        </a>
+                        <a ng-click="revove(item.id)" class="btn btn-link">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
     </div>
-    <div class="col-lg-8">
-        <ul class="pagination  pull-right">
-            <li class="previous disabled" ng-show="pager.isFirstPage||!pager.hasPreviousPage"><a><span aria-hidden="true">&larr;</span> Previous</a></li>
-            <li class="previous" ng-hide="pager.isFirstPage||!pager.hasPreviousPage"><a href="#/message/list?page={{pager.pageNumber-1}}&search={{search}}&column={{column}}&sort={{sort}}"><span aria-hidden="true">&larr;</span> Previous</a></li>
-            <li ng-repeat="n in range(1,pager.pageCount)" ng-class="{'active': pager.pageNumber == n}"><a href="#/message/list?page={{n}}&search={{search}}&column={{column}}&sort={{sort}}">{{n}}</a></li>
-            <li class="next disabled" ng-show="pager.isLastPage||!pager.hasNextPage"><a>Next <span aria-hidden="true">&rarr;</span></a></li>
-            <li class="next" ng-hide="pager.isLastPage||!pager.hasNextPage"><a href="#/message/list?page={{pager.pageNumber+1}}&search={{search}}&column={{column}}&sort={{sort}}">Next <span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
+    <div class="col-xs-4">
+
+        <form class="form-horizontal" role="form" novalidate="novalidate" ng-submit="save()" disable-auto-validate="true" validate-on-form-submit="true">
+
+            <div class="form-group">
+                <label for="text" class="control-label">Text</label>
+                <textarea id="text" name="text" type="text" class="form-control  input-sm" data-ng-model="messageData.text" placeholder="Text" required></textarea>
+            </div>
+
+
+            <input type="submit" class="btn btn-primary" value="Save" />
+
+        </form>
     </div>
+
 </div>

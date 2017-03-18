@@ -6,11 +6,7 @@ namespace Demo.SP.Models
 {
     public class Message : Entity
     {
-
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
-
+         
         [Required]
         [StringLength(250)] 
         public string Text { get; set; }

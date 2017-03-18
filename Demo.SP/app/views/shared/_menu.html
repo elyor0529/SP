@@ -1,7 +1,9 @@
 ﻿<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.isAuth">
     <li>
-        <strong>{{authentication.email}}</strong>
-        <a href="#" data-ng-click="logOut()">
+        <a href="#">Welcome {{authentication.username}}!</a>
+    </li>
+    <li>
+        <a href="#" ng-click="logOut()">
             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
             Logout
         </a>
