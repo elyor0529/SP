@@ -325,7 +325,6 @@
     <Content Include="assets\components\ui\validate.min.js" />
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
-    <Content Include="assets\css\PagedList.css" />
     <Content Include="assets\css\site.css" />
     <Content Include="assets\css\windows8.css" />
     <Content Include="assets\font-awesome\css\font-awesome.min.css" />
