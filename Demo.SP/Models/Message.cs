@@ -18,10 +18,9 @@ namespace Demo.SP.Models
         [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
 
-        [StringLength(36)]
-        public string UserId { get; set; }
-
-        public virtual ApplicationUser User { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string User{ get; set; }
 
     }
 }

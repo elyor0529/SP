@@ -25,43 +25,22 @@
         $urlRouterProvider.otherwise("/login");
 
         //states
-        $stateProvider 
+        $stateProvider
             .state("login", {
                 url: "/login",
                 templateUrl: "../app/views/account/login.html",
                 controller: "loginController",
                 anonymous: true
-            }) 
+            })
              .state("messagelist", {
-                 url: "/message/list?{page:int}&{search}&{column}&{sort}",
+                 url: "/message/list?{user}",
                  templateUrl: "../app/views/message/list.html",
                  controller: "messagelistController",
                  authenticated: true,
                  params: {
-                     page: 1,
-                     search: "",
-                     column: "id",
-                     sort: "asc"
+                     user: "guest"
                  }
-             })
-            .state("messageadd", {
-                url: "/message/add",
-                templateUrl: "../app/views/message/add.html",
-                controller: "messageaddController",
-                authenticated: true
-            })
-            .state("messageedit", {
-                url: "/message/edit?{id:int}",
-                templateUrl: "../app/views/message/edit.html",
-                controller: "messageeditController",
-                authenticated: true
-            })
-           .state("messageremove", {
-               url: "/message/remove?{id:int}",
-               templateUrl: "../app/views/message/remove.html",
-               controller: "messageremoveController",
-               authenticated: true
-           });
+             });
 
     }]);
 

@@ -92,18 +92,6 @@
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
-      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -198,30 +186,17 @@
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Http.Owin">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\ApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -253,10 +228,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\SortTypes.cs" />
-    <Compile Include="ViewModels\MessageListViewModel.cs" />
-    <Compile Include="ViewModels\MessagePropertyKeys.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,43 +235,20 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="ViewModels\Account\ResetPasswordBindingModel.cs" />
-    <Compile Include="ViewModels\Account\AddExternalLoginBindingModel.cs" />
-    <Compile Include="ViewModels\Account\ChangePasswordBindingModel.cs" />
-    <Compile Include="ViewModels\Account\ConfirmEmailBindingModel.cs" />
-    <Compile Include="ViewModels\Account\ExternalLoginViewModel.cs" />
-    <Compile Include="ViewModels\Account\ForgotPasswordBindingModel.cs" />
-    <Compile Include="ViewModels\Account\ManageInfoViewModel.cs" />
-    <Compile Include="ViewModels\Account\RegisterBindingModel.cs" />
-    <Compile Include="ViewModels\Account\RegisterExternalBindingModel.cs" />
-    <Compile Include="ViewModels\Account\RemoveLoginBindingModel.cs" />
-    <Compile Include="ViewModels\Account\SetPasswordBindingModel.cs" />
-    <Compile Include="ViewModels\Account\UserInfoViewModel.cs" />
-    <Compile Include="ViewModels\Account\UserLoginInfoViewModel.cs" />
-    <Compile Include="ViewModels\Account\VerificationEmailBindingModel.cs" />
-    <Compile Include="ViewModels\PagerListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\controllers\account\loginController.js" />
-    <Content Include="app\controllers\message\addController.js" />
-    <Content Include="app\controllers\message\editController.js" />
     <Content Include="app\controllers\message\listController.js" />
-    <Content Include="app\controllers\message\removeController.js" />
     <Content Include="app\services\accountService.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\messageService.js" />
     <Content Include="app\services\utilityService.js" />
     <Content Include="app\views\account\login.html" />
     <Content Include="app\views\message\add.html" />
-    <Content Include="app\views\message\edit.html" />
     <Content Include="app\views\message\list.html" />
-    <Content Include="app\views\message\remove.html" />
     <Content Include="app\views\shared\_menu.html" />
     <Content Include="app\views\shared\_title.html" />
     <Content Include="App_Data\readem.txt" />

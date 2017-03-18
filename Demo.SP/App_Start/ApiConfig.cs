@@ -11,8 +11,7 @@ namespace Demo.SP
         public static void Register(HttpConfiguration config)
         {
             //route
-            config.Routes.MapHttpRoute("ActionApi", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
 
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();

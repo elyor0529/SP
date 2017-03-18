@@ -15,16 +15,14 @@
         var serviceFactory = {};
 
         serviceFactory.list = list;
-        serviceFactory.add = add;
-        serviceFactory.edit = edit;
-        serviceFactory.details = details;
+        serviceFactory.add = add; 
         serviceFactory.remove = remove;
 
         return serviceFactory;
 
-        function list(page, search, column, sort) {
+        function list(page) {
 
-            return $http.get(utility.baseAddress + "/api/message/list?page=" + page + "&search=" + search + "&column=" + column + "&sort=" + sort)
+            return $http.get(utility.baseAddress + "/api/message/list?page="+page)
                 .then(function (response) {
                     return response;
                 });
@@ -37,23 +35,7 @@
                     return response;
                 });
         }
-
-        function edit(messageData) {
-
-            return $http.put(utility.baseAddress + "/api/message/edit", messageData)
-                .then(function (response) {
-                    return response;
-                });
-        }
-
-        function details(id) {
-
-            return $http.get(utility.baseAddress + "/api/message/details/" + id)
-                .then(function (response) {
-                    return response;
-                });
-        }
-
+         
         function remove(id) {
 
             return $http.delete(utility.baseAddress + "/api/message/remove/" + id)

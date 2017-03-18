@@ -13,15 +13,15 @@
     function messagelistCtrl($rootScope, $scope, $stateParams, $window, $http, $q, messageService, utilityService, bootstrap3ElementModifier) {
 
         bootstrap3ElementModifier.enableValidationStateIcons(false);
+        $scope.messageData = {
+            name: "",
+            text: ""
+        };
 
-        $scope.page = $stateParams.page;
-        $scope.search = $stateParams.search;
-        $scope.searching = searching;
+        $scope.add = add;
+        $scope.page = $stateParams.page; 
         $scope.list = list;
-        $scope.sorting = sorting;
-        $scope.reset = reset;
-        $scope.sort = $stateParams.sort;
-        $scope.column = $stateParams.column; 
+        $scope.remove = remove;
 
         // initialize your users data
         (function () {
@@ -31,31 +31,24 @@
             list();
 
         })();
+         
+        function remove(){
+            
+            messageService.remove($stateParams.id)
+                .then(function(response) {
 
-        function reset() {
-            $scope.search = "";
+                    $rootScope.message = "Message deleted successfully.";
 
-            list();
-        }
+                    utilityService.redirectTo("message/list");
 
-        function searching() {
-
-            $window.location.href = "#/message/list?page=" + $scope.page + "&search=" + $scope.search + "&column=" + $scope.column + "&sort=" + $scope.sort;
-        }
-
-        function sorting(column) {
-
-            $scope.column = column;
-
-            if ($scope.sort === "asc") {
-                $scope.sort = "desc";
-            } else {
-                $scope.sort = "asc";
-            }
+                })
+                .catch(function(response) {
+                    $rootScope.error = utilityService.throwErrors(response);
+                });
         }
          
         function list() {
-            messageService.list($scope.page, $scope.search, $scope.column, $scope.sort)
+            messageService.list($scope.page)
                 .then(function (response) {
 
                     $scope.messageData = response.data.items;
@@ -65,6 +58,20 @@
                 .catch(function (response) {
                     $rootScope.error = utilityService.throwErrors(response);
                 });
+        }
+
+        function add() {
+
+            messageService.add($scope.messageData)
+                .then(function (response) {
+                    $rootScope.message = "Message successfully saved.";
+
+                    utilityService.redirectTo("message/list");
+                })
+                .catch(function (response) {
+                    $rootScope.error = utilityService.throwErrors(response);
+                });
+
         }
     }
 

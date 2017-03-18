@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
 
     "use strict";
 
@@ -8,18 +8,17 @@
     app.controller("loginController", loginCtrl);
 
     //injections
-    loginCtrl.$inject = ["$rootScope", "$scope", "$location", "accountService"];
+    loginCtrl.$inject = ["$rootScope", "$scope", "$location","accountService"];
 
     function loginCtrl($rootScope, $scope, $location, accountService) {
 
         $scope.loginData = {
-            email: "",
-            password: ""
+            username: "guest"
         };
         $scope.login = login;
 
         // initialize your users data
-        (function() {
+        (function () {
 
             $rootScope.title = "Login";
 
@@ -27,26 +26,9 @@
 
         function login() {
 
-            accountService.login($scope.loginData)
-                .then(function(response) {
-                     
-                        $location.path("/message/list");
+            accountService.login($scope.loginData);
 
-                    },
-                    function(err) {
-
-                        try {
-
-                            var data = JSON.parse(err.error);
-
-                            $scope.email = data.Email; 
-                            $rootScope.error = "User no confirmed.";
-
-                        } catch (e) {
-                            $rootScope.error = err.error;
-                        }
-
-                    });
+            $location.path("/message/list");
         }
 
     }
