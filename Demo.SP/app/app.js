@@ -3,7 +3,7 @@
     "use strict";
 
     //defining angularjs module
-    var app = angular.module("app", ["ui.router", "LocalStorageModule", "ngCookies", "angular-loading-bar", "jcs-autoValidate", "textAngular", "ngFileUpload", "xeditable", "angular.filter"]);
+    var app = angular.module("app", ["ui.router", "LocalStorageModule", "ngCookies", "angular-loading-bar", "jcs-autoValidate",  "angular.filter"]);
 
     //global service
     app.constant("utility", {
@@ -22,81 +22,21 @@
         $httpProvider.interceptors.push("authInterceptorService");
 
         //default url
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/login");
 
         //states
-        $stateProvider
-            .state("home", {
-                url: "/home",
-                templateUrl: "../app/views/home/index.html",
-                controller: "homeController",
-                anonymous: true
-            })
-             .state("cookieuse", {
-                 url: "/cookieuse",
-                 templateUrl: "../app/views/home/cookieuse.html",
-                 controller: "cookieuseController",
-                 anonymous: true
-             })
-             .state("privacypolicy", {
-                 url: "/privacypolicy",
-                 templateUrl: "../app/views/home/privacypolicy.html",
-                 controller: "privacypolicyController",
-                 anonymous: true
-             })
-             .state("termsofservice", {
-                 url: "/termsofservice",
-                 templateUrl: "../app/views/home/termsofservice.html",
-                 controller: "termsofserviceController",
-                 anonymous: true
-             })
-            .state("profile", {
-                url: "/profile",
-                templateUrl: "../app/views/account/profile.html",
-                controller: "profileController",
-                authenticated: true
-            })
+        $stateProvider 
             .state("login", {
                 url: "/login",
                 templateUrl: "../app/views/account/login.html",
                 controller: "loginController",
                 anonymous: true
-            })
-            .state("signup", {
-                url: "/signup",
-                templateUrl: "../app/views/account/signup.html",
-                controller: "signupController",
-                anonymous: true
-            })
-             .state("confirmemail", {
-                 url: "/confirmemail?{email}&{token}",
-                 templateUrl: "../app/views/account/confirmemail.html",
-                 controller: "confirmemailController",
-                 anonymous: true
-             })
-             .state("forgotpassword", {
-                 url: "/forgotpassword",
-                 templateUrl: "../app/views/account/forgotpassword.html",
-                 controller: "forgotpasswordController",
-                 anonymous: true
-             })
-            .state("resetpassword", {
-                url: "/resetpassword?{token}",
-                templateUrl: "../app/views/account/resetpassword.html",
-                controller: "resetpasswordController",
-                anonymous: true
-            })
-            .state("verificationemail", {
-                url: "/verificationemail?{email}",
-                templateUrl: "../app/views/account/verificationemail.html",
-                controller: "verificationemailController",
-                anonymous: true
-            })
+            }) 
              .state("messagelist", {
                  url: "/message/list?{page:int}&{search}&{column}&{sort}",
                  templateUrl: "../app/views/message/list.html",
                  controller: "messagelistController",
-                 anonymous: true,
+                 authenticated: true,
                  params: {
                      page: 1,
                      search: "",
@@ -125,11 +65,8 @@
 
     }]);
 
-    app.run(["$rootScope", "$location", "utility", "accountService", "editableOptions", function ($rootScope, $location, utility, accountService, editableOptions) {
-
-        // bootstrap3 theme. Can be also 'bs2', 'default'
-        editableOptions.theme = "bs3";
-
+    app.run(["$rootScope", "$location", "utility", "accountService",  function ($rootScope, $location, utility, accountService) {
+          
         $rootScope.pageLoaging = false;
 
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {

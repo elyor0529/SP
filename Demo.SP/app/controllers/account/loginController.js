@@ -29,10 +29,8 @@
 
             accountService.login($scope.loginData)
                 .then(function(response) {
-
-                        $scope.gRecaptchaResponse = "";
-
-                        $location.path("/profile");
+                     
+                        $location.path("/message/list");
 
                     },
                     function(err) {
@@ -41,8 +39,7 @@
 
                             var data = JSON.parse(err.error);
 
-                            $scope.email = data.Email;
-                            $scope.noconfirmed = true;
+                            $scope.email = data.Email; 
                             $rootScope.error = "User no confirmed.";
 
                         } catch (e) {

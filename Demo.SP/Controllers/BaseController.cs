@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Demo.SP.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Demo.SP.Controllers
@@ -11,50 +12,49 @@ namespace Demo.SP.Controllers
     [Authorize]
     public abstract class BaseController : ApiController
     {
-        private ApplicationDbContext _db;
-        private ApplicationUserManager _userManager;
-         
-        protected BaseController()
-        {
+        private readonly ApplicationDbContext _db;
+        private readonly ApplicationUserManager _manager;
 
-        }
-
-        protected BaseController(ApplicationDbContext db, ApplicationUserManager userManager)
+        protected BaseController(ApplicationDbContext db, ApplicationUserManager manager)
         {
             _db = db;
+            _manager = manager;
         }
 
-        protected ApplicationUserManager UserManager
+        protected IHttpActionResult GetErrorResult(IdentityResult result)
         {
-            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
+            if (result == null)
+                return InternalServerError();
 
-        protected ApplicationDbContext Db
-        {
-            get { return _db ?? Request.GetOwinContext().GetUserManager<ApplicationDbContext>(); }
-            private set { _db = value; }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            if (!result.Succeeded)
             {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
+                if (result.Errors != null)
+                    foreach (var error in result.Errors)
+                        ModelState.AddModelError("", error);
 
-                if (_db != null)
-                {
-                    _db.Dispose();
-                    _db = null;
-                }
+                if (ModelState.IsValid)
+                    return BadRequest();
+
+                return BadRequest(ModelState);
             }
 
-            base.Dispose(disposing);
+            return null;
         }
 
+        protected virtual ApplicationDbContext Db
+        {
+            get
+            {
+                return _db;
+            }
+        }
+        protected virtual ApplicationUserManager Manager
+        {
+            get
+            {
+                return _manager;
+            }
+        }
+          
     }
 }

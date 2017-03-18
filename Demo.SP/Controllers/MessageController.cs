@@ -13,9 +13,13 @@ namespace Demo.SP.Controllers
     {
         private const int PAGE_SIZE = 20;
 
+        public MessageController(ApplicationDbContext db, ApplicationUserManager manager) : base(db, manager)
+        {
+
+        }
+
         [HttpGet]
         [ActionName("list")]
-        [AllowAnonymous]
         public IHttpActionResult GetList(int page = 1, string search = "", string column = MessagePropertyKeys.ID, string sort = SortTypes.ASC)
         {
             var query = Db.Messages.AsQueryable();
@@ -72,7 +76,7 @@ namespace Demo.SP.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
+             
             model.UserId = User.Identity.GetUserId();
             Db.Messages.Add(model);
             Db.Entry(model).State = EntityState.Added;
@@ -93,7 +97,7 @@ namespace Demo.SP.Controllers
 
             if (ent == null)
                 return NotFound();
-             
+
             ent.Text = model.Text;
             ent.Name = model.Name;
             ent.Date = model.Date;

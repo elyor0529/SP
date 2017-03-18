@@ -18,32 +18,14 @@
             email: "",
             token: ""
         };
-
-        accountServiceFactory.signup = signup;
+         
         accountServiceFactory.fillAuthData = fillAuthData;
         accountServiceFactory.logOut = logOut;
-        accountServiceFactory.login = login;
-        accountServiceFactory.forgotpassword = forgotpassword;
-        accountServiceFactory.profile = profile;
-        accountServiceFactory.save = save;
-        accountServiceFactory.resetpassword = resetpassword;
-        accountServiceFactory.confirm = confirm;
-        accountServiceFactory.verification = verification;
+        accountServiceFactory.login = login; 
         accountServiceFactory.authentication = authentication;
 
         return accountServiceFactory;
-
-        function signup(signupData) {
-
-            logOut();
-
-            return $http.post(utility.baseAddress + "/api/account/register", signupData)
-                .then(function(response) {
-                    return response;
-                });
-
-        }
-
+         
         function fillAuthData() {
 
             var authData = localStorageService.get("authorizationData");
@@ -75,7 +57,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(utility.baseAddress + "/token",
+            $http.post(utility.baseAddress + "/account/login",
                     data,
                     {
                         headers: {
@@ -103,55 +85,7 @@
                 });
 
             return deferred.promise;
-        }
-
-        function forgotpassword(forgotpasswordData) {
-
-            return $http.post(utility.baseAddress + "/api/account/forgotpassword", forgotpasswordData)
-                .then(function(response) {
-                    return response;
-                });
-        }
-
-        function profile() {
-
-            return $http.get(utility.baseAddress + "/api/account/userinfo")
-                .then(function(response) {
-                    return response;
-                });
-        }
-
-        function save(userData) {
-
-            return $http.post(utility.baseAddress + "/api/account/save", userData)
-                .then(function(response) {
-                    return response;
-                });
-        }
-
-        function resetpassword(resetpasswordData) {
-
-            return $http.post(utility.baseAddress + "/api/account/resetpassword", resetpasswordData)
-                .then(function(response) {
-                    return response;
-                });
-        }
-
-        function confirm(confirmData) {
-
-            return $http.post(utility.baseAddress + "/api/account/confirmemail", confirmData)
-                .then(function(response) {
-                    return response;
-                });
-        }
-
-        function verification(verificationData) {
-
-            return $http.post(utility.baseAddress + "/api/account/verificationemail", verificationData)
-                .then(function(response) {
-                    return response;
-                });
-        }
+        } 
 
     }
 

@@ -13,14 +13,9 @@ namespace Demo.SP.Models
 {
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-
-        static ApplicationDbContext()
-        {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
-        }
-
-        private void ReConfigure()
+    { 
+          
+        public ApplicationDbContext() : base("Name=DefaultConnection")
         {
             Configuration.AutoDetectChangesEnabled = false;
             Configuration.ProxyCreationEnabled = false;
@@ -28,17 +23,12 @@ namespace Demo.SP.Models
             Configuration.LazyLoadingEnabled = false;
         }
 
-        public ApplicationDbContext() : base("Name=DefaultConnection")
-        {
-            ReConfigure();
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Multiple navigation property filter
-            modelBuilder.Filter("isDeleted", (Entity f) => f.IsDeleted, false);
+            modelBuilder.Filter("IsDeleted", (Entity f) => f.IsDeleted, false);
         }
 
         public virtual DbSet<Message> Messages { get; set; }

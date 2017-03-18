@@ -2,6 +2,7 @@ using System.Data.Entity.Migrations;
 using Demo.SP.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Demo.SP.Migrations
 {
@@ -21,7 +22,7 @@ namespace Demo.SP.Migrations
         {
 
             //users
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context),new DpapiDataProtectionProvider());
 
             var user = userManager.FindById(DEFAULT_USR);
             if (user == null)

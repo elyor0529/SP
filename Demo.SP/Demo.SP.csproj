@@ -47,6 +47,22 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.Owin.4.0.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -205,11 +221,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntiSqlInjection.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\ApiConfig.cs" />
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\SortTypes.cs" />
@@ -217,11 +258,9 @@
     <Compile Include="ViewModels\MessagePropertyKeys.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Extensions\EncodingExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SendGridHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -243,48 +282,29 @@
     <Compile Include="ViewModels\PagerListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Providers\EmailService.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\controllers\account\confirmemailController.js" />
-    <Content Include="app\controllers\account\forgotpasswordController.js" />
     <Content Include="app\controllers\account\loginController.js" />
-    <Content Include="app\controllers\account\profileController.js" />
-    <Content Include="app\controllers\account\resetpasswordController.js" />
-    <Content Include="app\controllers\account\signupController.js" />
-    <Content Include="app\controllers\account\verificationemailController.js" />
     <Content Include="app\controllers\message\addController.js" />
     <Content Include="app\controllers\message\editController.js" />
     <Content Include="app\controllers\message\listController.js" />
     <Content Include="app\controllers\message\removeController.js" />
-    <Content Include="app\controllers\home\cookieuseController.js" />
-    <Content Include="app\controllers\home\indexController.js" />
-    <Content Include="app\controllers\home\privacypolicyController.js" />
-    <Content Include="app\controllers\home\termsofserviceController.js" />
     <Content Include="app\services\accountService.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\messageService.js" />
     <Content Include="app\services\utilityService.js" />
-    <Content Include="app\views\account\confirmemail.html" />
-    <Content Include="app\views\account\forgotpassword.html" />
     <Content Include="app\views\account\login.html" />
-    <Content Include="app\views\account\profile.html" />
-    <Content Include="app\views\account\resetpassword.html" />
-    <Content Include="app\views\account\signup.html" />
-    <Content Include="app\views\account\verificationemail.html" />
     <Content Include="app\views\message\add.html" />
     <Content Include="app\views\message\edit.html" />
     <Content Include="app\views\message\list.html" />
     <Content Include="app\views\message\remove.html" />
-    <Content Include="app\views\home\cookieuse.html" />
-    <Content Include="app\views\home\index.html" />
-    <Content Include="app\views\home\privacypolicy.html" />
-    <Content Include="app\views\home\termsofservice.html" />
     <Content Include="app\views\shared\_menu.html" />
     <Content Include="app\views\shared\_title.html" />
+    <Content Include="App_Data\readem.txt" />
+    <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="assets\components\angular-animate.js" />
     <Content Include="assets\components\angular-animate.min.js" />
     <Content Include="assets\components\angular-aria.js" />
@@ -317,15 +337,6 @@
     <Content Include="assets\components\loading-bar.js" />
     <Content Include="assets\components\loading-bar.min.css" />
     <Content Include="assets\components\loading-bar.min.js" />
-    <Content Include="assets\components\ng-file-upload\FileAPI.flash.swf" />
-    <Content Include="assets\components\ng-file-upload\FileAPI.js" />
-    <Content Include="assets\components\ng-file-upload\FileAPI.min.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload-all.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload-all.min.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload-shim.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload-shim.min.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload.js" />
-    <Content Include="assets\components\ng-file-upload\ng-file-upload.min.js" />
     <Content Include="assets\components\textAngular\textAngular-rangy.min.js" />
     <Content Include="assets\components\textAngular\textAngular-sanitize.js" />
     <Content Include="assets\components\textAngular\textAngular-sanitize.min.js" />
@@ -365,50 +376,45 @@
     <Content Include="assets\components\ui\uploader.min.js" />
     <Content Include="assets\components\ui\validate.js" />
     <Content Include="assets\components\ui\validate.min.js" />
-    <Content Include="assets\components\xeditable\css\xeditable.css" />
-    <Content Include="assets\components\xeditable\css\xeditable.min.css" />
-    <Content Include="assets\components\xeditable\js\xeditable.js" />
-    <Content Include="assets\components\xeditable\js\xeditable.min.js" />
-    <Content Include="assets\css\bootstrap-datepicker3.css" />
-    <Content Include="assets\css\bootstrap-datepicker3.min.css" />
-    <Content Include="assets\css\bootstrap-switch.css" />
-    <Content Include="assets\css\bootstrap-switch.min.css" />
     <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap-theme.min.css" />
-    <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\PagedList.css" />
-    <Content Include="assets\css\select2.css" />
-    <Content Include="assets\css\select2.min.css" />
     <Content Include="assets\css\site.css" />
     <Content Include="assets\css\windows8.css" />
-    <Content Include="assets\font-awesome\css\font-awesome.css" />
     <Content Include="assets\font-awesome\css\font-awesome.min.css" />
     <Content Include="assets\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\loading-sm.gif" />
     <Content Include="assets\images\loading.gif" />
     <Content Include="assets\js\angular.js" />
-    <Content Include="assets\js\angular.min.js" />
-    <Content Include="assets\js\bootstrap-datepicker.js" />
-    <Content Include="assets\js\bootstrap-datepicker.min.js" />
-    <Content Include="assets\js\bootstrap-switch.js" />
-    <Content Include="assets\js\bootstrap-switch.min.js" />
-    <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
-    <Content Include="assets\js\jquery.js" />
     <Content Include="assets\js\jquery.min.js" />
-    <Content Include="assets\js\modernizr.js" />
     <Content Include="assets\js\modernizr.min.js" />
-    <Content Include="assets\js\respond.js" />
     <Content Include="assets\js\respond.min.js" />
-    <Content Include="assets\js\select2.js" />
-    <Content Include="assets\js\select2.min.js" />
     <Content Include="assets\js\site.js" />
-    <Content Include="assets\js\underscore.js" />
     <Content Include="assets\js\underscore.min.js" />
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="assets\js\_references.js" />
-    <Content Include="assets\tmp\noimage.jpg" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />

@@ -12,7 +12,6 @@ namespace Demo.SP
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(ApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }  
     }
 }
